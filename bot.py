@@ -5,7 +5,7 @@ import asyncio
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 fileExt = [".png",".jpg",".jpeg",".gif",".bmp",".tiff"]
-channelID = "819472181578432533"
+channelID = 819472181578432533
 
 @client.event
 async def on_ready():
@@ -20,7 +20,8 @@ async def on_message(message):
            async for x in (message.channel.history()):
                if toDelete(x):
                    print("deleting"+x.content)
-                   await x.delete()
+                   if x.content != "!purge":
+                       await x.delete()
            return
        if toDelete(message):
            await message.delete()
